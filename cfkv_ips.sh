@@ -11,7 +11,7 @@ FILENAME="yx_ips.txt"
 content=$(head -n 65 "$FILENAME" | tr '\n' '\0' | xargs -0 -I {} bash -c 'echo -n "$0" | base64' {})BASE64_TEXT="$content"
 
 # 构造URL
-URL="https://${DOMAIN}/${FILENAME}?token=${TOKEN}&b64=${BASE64_TEXT}"
+URL="https://${CF_DOMAIN}/${FILENAME}?token=${CF_TOKEN}&b64=${BASE64_TEXT}"
 
 # 使用curl命令模拟向URL发起请求（这里你可能需要根据实际接收端的要求调整请求方式等，比如添加请求头之类的，此处仅简单示例发送GET请求）
 curl "$URL"

@@ -11,7 +11,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     - name: Run upload script
-      run: bash upload_data.sh ${{ github.event.inputs.filename }}
+      run: bash cfkv_ips.sh ${{ github.event.inputs.filename }}
       shell: bash
       env:
         DOMAIN: ${{ secrets.CF_DOMAIN }}

@@ -41,7 +41,7 @@ jobs:
         git push origin main
 
     - name: Run upload script
-      run: bash cfkv_ips.sh ${{ github.event.inputs.filename }}
+      run: bash cfkv_ips.sh yx_ips.txt
       shell: bash
       env:
         DOMAIN: ${{ secrets.CF_DOMAIN }}

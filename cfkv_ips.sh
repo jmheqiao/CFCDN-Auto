@@ -5,7 +5,7 @@ export LANG=en_US.UTF-8
 # 获取从GitHub环境变量中设置的DOMAIN和TOKEN，注意这里要提前在GitHub仓库的设置中配置好对应的环境变量
 DOMAIN="${CF_DOMAIN}"
 TOKEN="${CF_TOKEN}"
-FILENAME="yx_ips.txt"
+FILENAME="$1"
 
 # 获取文件内容的前65行并转为Base64，使用常见的Linux命令来实现类似功能
 content=$(head -n 65 "$FILENAME" | tr '\n' '\0' | xargs -0 -I {} bash -c 'echo -n "$0" | base64' {})BASE64_TEXT="$content"

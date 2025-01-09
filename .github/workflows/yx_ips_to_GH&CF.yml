@@ -40,8 +40,6 @@ jobs:
         git commit -m "Update yx_ips.txt" || echo "No changes to commit"
         git push origin main
 
-    - name: Checkout code
-      uses: actions/checkout@v3
     - name: Run upload script
       run: bash cfkv_ips.sh ${{ github.event.inputs.filename }}
       shell: bash

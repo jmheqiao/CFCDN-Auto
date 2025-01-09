@@ -1,47 +1,17 @@
-name: 更新CDN和KV的ips
-
+name: Upload Data Workflow
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 0,4,8,12,16,20 * * *' # 每4小时运行一次
-  #workflow_dispatch: # 手动触发
+  push:
+    branches:
+      - main  # 这里可以根据实际情况修改触发工作流的分支，比如改成'master'等
 
 jobs:
-  run-and-commit:
+  upload_data_job:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install requests beautifulsoup4
-
-    - name: Run the yx_ips script
-      env:
-        CF_API_KEY: ${{ secrets.CF_API_KEY }}
-        CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
-        CF_DOMAIN_NAME: ${{ secrets.CF_DOMAIN_NAME }}
-        CF_API_EMAIL: ${{ secrets.CF_API_EMAIL }}
-      run: python yx_ips.py
-
-    - name: Commit and push changes
-      run: |
-        git config --global user.email "actions@github.com"
-        git config --global user.name "GitHub Actions"
-        git add yx_ips.txt
-        git commit -m "Update yx_ips.txt" || echo "No changes to commit"
-        git push origin main
-
+    - name: Checkout code
+      uses: actions/checkout@v3
     - name: Run upload script
-      run: bash cfkv_ips.sh yx_ips.txt
+      run: bash upload_data.sh ${{ github.event.inputs.filename }}
       shell: bash
       env:
         DOMAIN: ${{ secrets.CF_DOMAIN }}

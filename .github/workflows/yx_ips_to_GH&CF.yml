@@ -1,9 +1,9 @@
-name: YX IPs and DNS
+name: 更新CDN和KV的ips
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 8,20 * * *' # 每12小时运行一次
+    - cron: '0 0,4,8,12,16,20 * * *' # 每4小时运行一次
   #workflow_dispatch: # 手动触发
 
 jobs:
@@ -44,5 +44,5 @@ jobs:
       run: bash upload_data.sh ${{ github.event.inputs.filename }}
       shell: bash
       env:
-        DOMAIN: ${{ secrets.DOMAIN }}
-        TOKEN: ${{ secrets.TOKEN }}
+        DOMAIN: ${{ secrets.CF_DOMAIN }}
+        TOKEN: ${{ secrets.CF_TOKEN }}

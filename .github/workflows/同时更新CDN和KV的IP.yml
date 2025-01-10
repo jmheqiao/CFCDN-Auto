@@ -1,4 +1,4 @@
-name: 同时更新CND和KV的IP
+name: 同时更新CDN和KV的IP
 on:
   workflow_dispatch:
   schedule:

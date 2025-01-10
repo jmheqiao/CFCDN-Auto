@@ -1,4 +1,4 @@
-name: Auto Update Data
+name: 更新KV的ips
 
 on: [push]  # 你可以在 push 事件时触发此工作流程
 
